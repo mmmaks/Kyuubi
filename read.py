@@ -6,8 +6,25 @@ cap = cv2.VideoCapture(0)
 LeftUpX = 150
 LeftUpY = 100
 
+unitD = 90
+
+BLACK = (0,0,0)
+
 RightDownX = 420
 RightDownY = 370
+
+pointsMatrix = [[(0,0) for i in xrange(0,4)] for i in xrange(0,4)]
+
+pointsMatrix[0][0] = (LeftUpX,LeftUpY)
+
+for i in xrange(0,4):
+	for j in xrange(0,4):
+		if i == 0 and j == 0:
+			continue
+		if j != 0:
+			pointsMatrix[i][j] = (pointsMatrix[i][j - 1][0] + unitD, pointsMatrix[i][j - 1][1])
+		else:
+			pointsMatrix[i][j] = (pointsMatrix[i - 1][j][0] , pointsMatrix[i - 1][j][1] + unitD)
 
 while(True):
 	# Capture frame-by-frame
@@ -16,17 +33,12 @@ while(True):
 	# Display the resulting frame
 	frame = cv2.flip(frame, 1)
 
-	#drawing rectangle
-	cv2.rectangle(frame,(LeftUpX, LeftUpY), (RightDownX, RightDownY), (0, 0, 0), 1)
+	for i in xrange(0,4):
+		cv2.line(frame, (pointsMatrix[0][i]), (pointsMatrix[3][i]), BLACK, 1)
 
-	#drawing vertical lines
-	cv2.line(frame, (LeftUpX + (-LeftUpX + RightDownX) / 3, LeftUpY), (LeftUpX + (-LeftUpX + RightDownX) / 3, RightDownY), (0, 0, 0), 1)
-	cv2.line(frame, (LeftUpX + 2 * (-LeftUpX + RightDownX) / 3, LeftUpY), (LeftUpX + 2 * (-LeftUpX + RightDownX) / 3, RightDownY), (0, 0, 0), 1)
+	for i in xrange(0,4):
+		cv2.line(frame, (pointsMatrix[i][0]), (pointsMatrix[i][3]), BLACK, 1)
 
-	#drawing horizontal lines
-	cv2.line(frame, (LeftUpX, LeftUpY + (-LeftUpY + RightDownY) / 3), (RightDownX, LeftUpY + (-LeftUpY + RightDownY) / 3), (0, 0, 0), 1)
-	cv2.line(frame, (LeftUpX, LeftUpY + 2 * (-LeftUpY + RightDownY) / 3), (RightDownX, LeftUpY + 2 * (-LeftUpY + RightDownY) / 3), (0, 0, 0), 1)
-	#frame = frame[LeftUpY:RightDownY, LeftUpX:RightDownX]
 	cv2.imshow('frame', frame)
 
 	#saving all 9 blocks
