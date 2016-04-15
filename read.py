@@ -41,30 +41,10 @@ while(True):
 
 	cv2.imshow('frame', frame)
 
-	#saving all 9 blocks
-	#First row
-	img0 = frame[LeftUpY:(LeftUpY + (-LeftUpY + RightDownY) / 3), LeftUpX:(LeftUpX + (-LeftUpX + RightDownX) / 3)]
-	cv2.imwrite("images/img0_0.jpg", img0)
-	img1 = frame[LeftUpY:(LeftUpY + (-LeftUpY + RightDownY) / 3), (LeftUpX + (-LeftUpX + RightDownX) / 3):(LeftUpX + 2*(-LeftUpX + RightDownX) / 3)]
-	cv2.imwrite("images/img0_1.jpg", img1)
-	img2 = frame[LeftUpY:(LeftUpY + (-LeftUpY + RightDownY) / 3), (LeftUpX + 2*(-LeftUpX + RightDownX) / 3):RightDownX]
-	cv2.imwrite("images/img0_2.jpg", img2)
-
-	#Second row
-	img3 = frame[(LeftUpY + (-LeftUpY + RightDownY) / 3):(LeftUpY + 2*(-LeftUpY + RightDownY) / 3), LeftUpX:(LeftUpX + (-LeftUpX + RightDownX) / 3)]
-	cv2.imwrite("images/img1_0.jpg", img3)
-	img4 = frame[(LeftUpY + (-LeftUpY + RightDownY) / 3):(LeftUpY + 2*(-LeftUpY + RightDownY) / 3), (LeftUpX + (-LeftUpX + RightDownX) / 3):(LeftUpX + 2*(-LeftUpX + RightDownX) / 3)]
-	cv2.imwrite("images/img1_1.jpg", img4)
-	img5 = frame[(LeftUpY + (-LeftUpY + RightDownY) / 3):(LeftUpY + 2*(-LeftUpY + RightDownY) / 3), (LeftUpX + 2*(-LeftUpX + RightDownX) / 3):RightDownX]
-	cv2.imwrite("images/img1_2.jpg", img5)
-
-	#Third row
-	img6 = frame[(LeftUpY + 2*(-LeftUpY + RightDownY) / 3):RightDownY, LeftUpX:(LeftUpX + (-LeftUpX + RightDownX) / 3)]
-	cv2.imwrite("images/img2_0.jpg", img6)
-	img7 = frame[(LeftUpY + 2*(-LeftUpY + RightDownY) / 3):RightDownY, (LeftUpX + (-LeftUpX + RightDownX) / 3):(LeftUpX + 2*(-LeftUpX + RightDownX) / 3)]
-	cv2.imwrite("images/img2_1.jpg", img7)
-	img8 = frame[(LeftUpY + 2*(-LeftUpY + RightDownY) / 3):RightDownY, (LeftUpX + 2*(-LeftUpX + RightDownX) / 3):RightDownX]
-	cv2.imwrite("images/img2_2.jpg", img8)
+	for i in xrange(3):
+		for j in xrange(3):
+			img = frame[pointsMatrix[i][j][1]:pointsMatrix[i + 1][j + 1][1] , pointsMatrix[i][j][0]:pointsMatrix[i + 1][j + 1][0] ]
+			cv2.imwrite("images/img"+str(i)+str(j)+".jpg", img)
 
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
@@ -77,7 +57,7 @@ cv2.destroyAllWindows()
 color0 = 0
 color1 = 0
 color2 = 0
-img0 = cv2.imread('images/img0_0.jpg')
+img0 = cv2.imread('images/img00.jpg')
 height, width, depth = img0.shape
 
 hc = height / 2
