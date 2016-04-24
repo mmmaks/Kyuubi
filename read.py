@@ -79,7 +79,49 @@ while(True):
 cap.release()
 cv2.destroyAllWindows()
 
+
+
+
+
+# Detecting colors
+color = ['Blue', 'Green', 'Orange', 'Red', 'White', 'Yellow']
+
+bgrColor = {}
+
+for clr in color:
+	colorName = 'colors/' + clr + '.txt'
+	f = open(colorName, 'r');
+	#print clr
+	value = []
+	for line in f:
+		line = line.replace('[', "")
+		line = line.replace(']', "")
+		line = line.split(', ')
+		B = float(line[0])
+		G = float(line[1])
+		R = float(line[2])
+		#print B,' ',G,' ',R
+		value.append( (B, G, R) )
+	bgrColor[clr] = value
+
+# for clr in color:
+# 	print clr
+# 	for val in bgrColor[clr]:
+		
+
 for loop1 in xrange(LIMIT):
 	for loop2 in xrange(LIMIT):
-		print colorMatrix[loop1][loop2]," ",
+		minDiff = 11111111111111111
+		blockColor = ""
+		for clr in color:
+			orgColor = colorMatrix[loop1][loop2]
+			temp = 0
+			for val in bgrColor[clr]:
+				temp += abs(orgColor[0] - val[0])
+				temp += abs(orgColor[1] - val[1])
+				temp += abs(orgColor[2] - val[2])
+			if temp < minDiff:
+				minDiff = temp
+				blockColor = clr
+		print blockColor
 	print ""
