@@ -107,10 +107,15 @@ while(True):
 			for clr in colorFaces:
 				orgColor = colorMatrix[i][j]
 				temp = 0
-				for val in bgrColor[clr]:
-					temp += abs(orgColor[0] - val[0])
-					temp += abs(orgColor[1] - val[1])
-					temp += abs(orgColor[2] - val[2])
+				# for val in bgrColor[clr]:
+				# 	temp += abs(orgColor[0] - val[0])
+				# 	temp += abs(orgColor[1] - val[1])
+				# 	temp += abs(orgColor[2] - val[2])
+
+				temp += abs(orgColor[0] - bgrColor[clr][i*3 + j][0])
+				temp += abs(orgColor[1] - bgrColor[clr][i*3 + j][1])
+				temp += abs(orgColor[2] - bgrColor[clr][i*3 + j][2])
+
 				if temp < minDiff:
 					minDiff = temp
 					blockColor = clr
