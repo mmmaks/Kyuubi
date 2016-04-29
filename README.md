@@ -47,8 +47,8 @@ Kyuubi is a 3x3 Rubik's Cube Solving Guide which helps the user to solve the Rub
     
 <h3>Owners - </h3>
 The project is owned by - <br>
-<b>1. <a href="www.github.com/kipawa">Aditya Shankar Tripathi</a></b><br>
-<b>2. <a href="www.github.com/mmaks">Manish Kumar Sinha</a></b><br>
+<b>1. <a href="https://github.com/kipawa">Aditya Shankar Tripathi</a></b><br>
+<b>2. <a href="https://github.com/mmmaks">Manish Kumar Sinha</a></b><br>
 
 <h3>Request to User</h3>
 For any bugs, just drop a mail at megatron6496@gmail.com
